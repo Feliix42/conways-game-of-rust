@@ -72,12 +72,12 @@ fn draw(win: &pancurses::Window, field: &Vec<Vec<CellState>>) {
     for line in field.iter() {
         win.mv(y, 0);
         // TODO Might want to use zip over enumerate to get an i32
-        for (pos, element) in line.iter().enumerate() {
-            let symbol: char = match *element {
+        for cell in 0..line.len() {
+            let symbol: char = match line[cell] {
                 CellState::Alive => 'x',
                 CellState::Dead  => ' '
             };
-            win.mvaddch(y, (pos * 2) as i32, symbol);
+            win.mvaddch(y, (cell * 2) as i32, symbol);
         }
         y += 1;
     }
