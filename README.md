@@ -1,6 +1,6 @@
-# Conways Game Of Life
+# Conway's Game Of Life
 
-This is a small implementation of Conways Game of Life, written in Rust.
+This is a small implementation of Conway's Game of Life, written in Rust.
 It's pretty much WIP at the moment and the code is a mess, but if you're interested: take a look!
 
 
