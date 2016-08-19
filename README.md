@@ -6,7 +6,7 @@ It's pretty much WIP at the moment and the code is a mess, but if you're interes
 
 ## Requirements
 
-This project uses [`pancurses`](https://github.com/ihalila/pancurses) (which uses [ncurses-rs](https://github.com/jeaye/ncurses-rs) under the hood) for displaying the game in your terminal. I advice you and especially Mac users to have a look at the [installation instructions](https://github.com/jeaye/ncurses-rs#building) for the OSX ncurses library.
+This project uses [`pancurses`](https://github.com/ihalila/pancurses) (which uses [ncurses-rs](https://github.com/jeaye/ncurses-rs) under the hood) for displaying the game in your terminal. I'd like to advice especially Mac users to have a look at the [installation instructions](https://github.com/jeaye/ncurses-rs#building) for the OSX ncurses library.
 
 ## Building
 After you've `git clone`d this repository fire up `cargo run` and you're good to go!
