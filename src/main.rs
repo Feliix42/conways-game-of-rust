@@ -19,6 +19,8 @@ impl Clone for CellState {
 }
 
 
+
+// TODO Size as i32?
 fn seed_field(size_y: u32, size_x: u32) -> Vec<Vec<CellState>> {
     // initialize a random number generator
     let mut rng = thread_rng();
@@ -39,8 +41,23 @@ fn seed_field(size_y: u32, size_x: u32) -> Vec<Vec<CellState>> {
 }
 
 
-#[allow(unused_variables)]
 fn draw(win: &pancurses::Window, field: &Vec<Vec<CellState>>) {
+    // TODO Check size, better adjustment of the Cells
+    let mut y: i32 = 0;
+
+    for line in field.iter() {
+        win.mv(y, 0);
+        // TODO Might want to use zip over enumerate to get an i32
+        for (pos, element) in line.iter().enumerate() {
+            let symbol: char = match *element {
+                CellState::Alive => 'x',
+                CellState::Dead  => ' '
+            };
+            win.mvaddch(y, (pos * 2) as i32, symbol);
+        }
+        y += 1;
+    }
+    win.refresh();
 }
 
 
@@ -50,14 +67,12 @@ fn main() {
     pancurses::noecho();
 
     // er, this is just for test purposes, ya know?
-    win.mv(4, 14);
-    win.printw("wow");
+    // win.mv(4, 14);
+    // win.printw("wow");
 
     //initially seed the field and print it
     let field = seed_field(20, 15);
     draw(&win, &field);
-    win.refresh();
-
 
     let _ = win.getch();
 
