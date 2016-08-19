@@ -56,7 +56,7 @@ fn seed_field(size_y: u32, size_x: u32) -> Vec<Vec<CellState>> {
 
     for line in field.iter_mut() {
         for cell in line.iter_mut() {
-            if generator.next().expect("You ran out of random numbers!") > ((u32::max_value() as f64) * 0.85) as u32 {
+            if generator.next().expect("You ran out of random numbers!") > ((u32::max_value() as f64) * 0.9) as u32 {
                 *cell = CellState::Alive;
             }
         }
@@ -71,7 +71,7 @@ fn draw(win: &pancurses::Window, field: &Vec<Vec<CellState>>) {
 
     for line in field.iter() {
         win.mv(y, 0);
-        // TODO Might want to use zip over enumerate to get an i32
+
         for cell in 0..line.len() {
             let symbol: char = match line[cell] {
                 CellState::Alive => 'x',
@@ -157,20 +157,21 @@ fn main() {
     // initialize the ncurses window
     let win = pancurses::initscr();
     pancurses::noecho();
-
-    // er, this is just for test purposes, ya know?
-    // win.mv(4, 14);
-    // win.printw("wow");
+    win.nodelay(true);
 
     //initially seed the field and print it
-    let mut field = seed_field(20, 15);
+    let mut field = seed_field(20, 20);
     loop {
         draw(&win, &field);
         field = evolve(field);
-        thread::sleep(time::Duration::from_millis(500));
-    }
+        thread::sleep(time::Duration::from_millis(100));
 
-    let _ = win.getch();
+        //quit if 'q' is pressed
+        match win.getch() {
+            Some(pancurses::Input::Character('q')) => break,
+            _                                      => continue
+        }
+    }
 
     // delete the window and close the ncurses session
     pancurses::delwin(win);
