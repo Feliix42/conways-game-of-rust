@@ -5,3 +5,4 @@ authors = ["Felix Wittwer <dev@felixwittwer.de>"]
 
 [dependencies]
 pancurses = "0.3.0"
+rand = "0.3"
